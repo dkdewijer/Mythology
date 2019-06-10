@@ -18,6 +18,7 @@ import static com.example.greekmythology.GodItemAdapter.ITEM_NAME;
 public class EditActivity extends AppCompatActivity {
 
     public static final String ITEM_EDIT_NAME = "edit_item_name";
+    public static final String CURRENT_ITEM_NAME = "old_item_name";
     Button saveButton;
     EditText editName, editCharacteristics, editDescription;
     private AppDatabase db;
@@ -56,14 +57,16 @@ public class EditActivity extends AppCompatActivity {
                 String updateCharacteristics = editCharacteristics.getText().toString();
                 String updateDescription = editDescription.getText().toString();
 
+
                 db.godItemDao().updateGod(new GodItem(updateName, updateCharacteristics, updateDescription));
 
                 Toast.makeText(EditActivity.this, "You have updated: " + updateName, Toast.LENGTH_SHORT).show();
 
+                intent.putExtra(CURRENT_ITEM_NAME, item.getName());
                 intent.putExtra(ITEM_EDIT_NAME , updateName);
 
+                onResume();
                 startActivity(intent);
-//                finish();
             }
         });
     }

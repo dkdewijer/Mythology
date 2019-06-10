@@ -26,7 +26,7 @@
             android:name=".EditActivity"
             android:parentActivityName=".DetailActivity" />
         <activity android:name=".AddActivity"
-            android:parentActivityName=".AddActivity"></activity>
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

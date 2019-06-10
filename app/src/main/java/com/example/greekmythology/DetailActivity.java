@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.greekmythology.database.AppDatabase;
 import com.example.greekmythology.model.GodItem;
 
+import static com.example.greekmythology.EditActivity.CURRENT_ITEM_NAME;
 import static com.example.greekmythology.EditActivity.ITEM_EDIT_NAME;
 import static com.example.greekmythology.GodItemAdapter.ITEM_NAME;
 
@@ -30,28 +31,27 @@ public class DetailActivity extends AppCompatActivity {
         //get db
         db = AppDatabase.getInstance(this);
 
-        //if intent is from edit set new name
-        if (getIntent().getExtras().getString(ITEM_NAME) == null) {
+        //check which item to get from the db
+        if (getIntent().getExtras().getString(ITEM_NAME) != null) {
+            itemName = getIntent().getExtras().getString(ITEM_NAME);
+        } else if (getIntent().getExtras().getString(ITEM_EDIT_NAME) != null) {
             itemName = getIntent().getExtras().getString(ITEM_EDIT_NAME);
         } else {
-             itemName = getIntent().getExtras().getString(ITEM_NAME);
+            itemName = getIntent().getExtras().getString(CURRENT_ITEM_NAME);
         }
-
         item = db.godItemDao().findByName(itemName);
-
         setTitle(item.getName());
 
+        //get text view
         name = findViewById(R.id.detail_god_name);
         characteristics = findViewById(R.id.detail_god_characteristics);
         description = findViewById(R.id.detail_god_description);
 
+        //set textview
         name.setText(item.getName());
         characteristics.setText(item.getCharacteristics());
         description.setText(item.getDetailedDescription());
-
-        Toast.makeText(this, "Received item: " + item.getName(), Toast.LENGTH_LONG).show();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,17 +65,18 @@ public class DetailActivity extends AppCompatActivity {
         // get current menu item id
         int id = item.getItemId();
 
-        // if delete all is selected, delete all records and update adapter and recycleview
         if (id == R.id.action_edit) {
             String itemId = this.item.getName();
             Intent intent = new Intent(this, EditActivity.class);
             intent.putExtra(ITEM_NAME, itemId);
-            this.startActivity(intent);
+            startActivity(intent);
         }
 
         if (id == R.id.action_delete) {
+            Intent intent = new Intent(this, MainActivity.class);
             db.godItemDao().deleteGod(this.item);
-            finish();
+            onResume();
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

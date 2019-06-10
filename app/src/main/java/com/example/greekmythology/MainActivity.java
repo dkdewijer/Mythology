@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             GodItemAdapter emptyAdapter = new GodItemAdapter(this, this.db.godItemDao().getAllGods());
             recyclerView.setAdapter(emptyAdapter);
 
-            Toast.makeText(this, "All the records have been deleted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "All the records have been deleted", Toast.LENGTH_LONG).show();
 
             return true;
         }

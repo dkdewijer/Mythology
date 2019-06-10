@@ -19,7 +19,6 @@ public class AddActivity extends AppCompatActivity {
     Button saveButton;
     EditText addName, addCharacteristics, addDescription;
     private AppDatabase db;
-    GodItem item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +44,13 @@ public class AddActivity extends AppCompatActivity {
                 String addNewCharacteristics = addCharacteristics.getText().toString();
                 String addNewDescription = addDescription.getText().toString();
 
+                // add god to db
                 db.godItemDao().insertGod(new GodItem(addNewName, addNewCharacteristics, addNewDescription));
 
+                Toast.makeText(AddActivity.this, "Your god has been added: " + addNewName, Toast.LENGTH_SHORT).show();
+
+                //go back to main activity
+                onResume();
                 startActivity(intent);
             }
         });
