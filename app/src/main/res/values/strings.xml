@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Greek Mythology</string>
     <string name="action_settings">Settings</string>
+    <string name="description">Zeus is the sky and thunder god in ancient Greek religion, who rules as king of the gods of Mount Olympus.</string>
+    <string name="characteristics">God of Lightning</string>
+    <string name="name">Zeus</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="edit_name">Edit name</string>
+    <string name="edit_characteristics">Edit characteristics</string>
+    <string name="edit_description">Edit description</string>
+    <string name="save_your_god">Save your god</string>
+    <string name="add_characteristics">Add characteristics</string>
+    <string name="add_description">Add description</string>
+    <string name="add_name">Add name</string>
 </resources>
